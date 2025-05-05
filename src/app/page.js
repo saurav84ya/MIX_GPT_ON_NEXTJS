@@ -11,20 +11,26 @@ export default function Home() {
         menu
       </div> : null}
 
-      <div className={` relative  max-w-[1024px] ${ auth ? "" : "mx-auto"  } bg-red-500 h-[90dvh] flex-1 flex flex-col items-center justify-center `}   >
+      <div className={`flex-1  ${auth ? "" : "mx-auto"} `} >
 
-        <div>
+        <div className={` relative  max-w-[1024px] mx-auto   h-[90dvh] flex flex-col items-center justify-center `}   >
+
           <div>
-            {res ? <ResChatGpt /> : <h1>What can I help with?</h1>}
+            <div>
+              {res ? <ResChatGpt /> : <h1>What can I help with?</h1>}
+            </div>
+
+          </div>
+
+          <div className={` ${res ? " absolute bottom-2   " : ""} `} >
+            <PromptInput />
           </div>
 
         </div>
 
-        <div className={` ${res ? " absolute bottom-2   " : ""} `} >
-          <PromptInput />
-        </div>
 
       </div>
+
 
       {/* <h1 className="text-center" >MixGpt can make mistakes. Check important info</h1> */}
     </div>
