@@ -1,14 +1,35 @@
+"use client"
+
 import PromptInput from "@/components/PromptInput";
 import ResChatGpt from "@/components/ResChatGpt";
+import SlideMenu from "@/components/SlideMenu";
+import { useMyContext } from "@/context/MyContext";
+import { useEffect, useRef } from "react";
 
 export default function Home() {
   const res = false
-  const auth = false
+  const auth = true
+
+   const { openMenu, setOpenMenu} = useMyContext();
+
+
+   const menuRef = useRef(null);
+       useEffect(() => {
+           const handleClickOutside = (event) => {
+             if (menuRef.current && !menuRef.current.contains(event.target)) {
+              setOpenMenu(false);
+             }
+           };
+       
+           document.addEventListener("mousedown", handleClickOutside);
+           return () => document.removeEventListener("mousedown", handleClickOutside);
+         }, []);
+
   return (
     <div className="relative flex "  >
 
-      {auth ? <div className="absolute z-20 lg:relative bg-green-400  h-[90dvh] w-[300px] " >
-        menu
+      { openMenu  && auth  ? <div ref={menuRef} className="absolute  z-20 lg:relative bg-[#212121]  " >
+        <SlideMenu/>
       </div> : null}
 
       <div className={`flex-1  ${auth ? "" : "mx-auto"} `} >
