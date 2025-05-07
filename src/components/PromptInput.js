@@ -27,8 +27,8 @@ export default function PromptInput() {
 
       const data = await res.json();
       if (data.success) {
-        setResponse(data.response);
-        toast.success("Response received!");
+        setResponse(data);
+        toast.success(`response from ${data?.model}`);
         setPrompt("")
       } else {
         toast.error("❌ " + data.message);

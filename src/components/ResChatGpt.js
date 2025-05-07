@@ -6,7 +6,7 @@ export default function ResChatGpt({response}) {
   console.log("response",response)
   return (
     <div>
-      {response}
+      {response.response}
     </div>
   )
 }

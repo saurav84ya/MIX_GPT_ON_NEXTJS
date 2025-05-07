@@ -30,9 +30,9 @@ export default function SlideMenu() {
         className="w-full bg-[#212121] p-2 rounded text-white font-bold cursor-pointer outline-none"
       >
         <option value="deepseek">DeepSeek</option>
-        <option value="chatGpt">Chat Gpt</option>
+        <option value="llama">Llama</option>
         <option value="gemini">Gemini</option>
-        <option value="gamma">Gamma</option>
+        <option value="gemma2">Gamma2</option>
       </select>
     </div>
 

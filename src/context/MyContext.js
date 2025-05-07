@@ -6,7 +6,7 @@ const MyContext = createContext();
 
 export const MyContextProvider = ({ children }) => {
 
-  const auth = true
+  const auth = false
 
   const [isDark, setIsDark] = useState(false);
       const [openMenu, setOpenMenu] = useState(false)
