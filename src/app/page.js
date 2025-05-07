@@ -7,10 +7,10 @@ import { useMyContext } from "@/context/MyContext";
 import { useEffect, useRef } from "react";
 
 export default function Home() {
-  const res = false
-  const auth = true
+  // const res = false
+  // const  = !true
 
-   const { openMenu, setOpenMenu} = useMyContext();
+   const { openMenu, setOpenMenu ,auth ,  response ,modelSlected , setSlectedModel} = useMyContext();
 
 
    const menuRef = useRef(null);
@@ -38,12 +38,12 @@ export default function Home() {
 
           <div>
             <div>
-              {res ? <ResChatGpt /> : <h1>What can I help with?</h1>}
+              {response ? <ResChatGpt response={response}  /> : <h1>What can I help with?</h1>}
             </div>
 
           </div>
 
-          <div className={` ${res ? " absolute bottom-2   " : ""} `} >
+          <div className={` ${response ? " absolute bottom-2   " : ""} `} >
             <PromptInput />
           </div>
 

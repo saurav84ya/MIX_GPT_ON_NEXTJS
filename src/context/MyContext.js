@@ -5,14 +5,23 @@ import { createContext, useState, useContext } from "react";
 const MyContext = createContext();
 
 export const MyContextProvider = ({ children }) => {
+
+  const auth = true
+
   const [isDark, setIsDark] = useState(false);
       const [openMenu, setOpenMenu] = useState(false)
+
+      const [prompt, setPrompt] = useState("");
+        const [response, setResponse] = useState("");
+        const [modelSelected , setSelectedModel] = useState("deepseek")
   
 
   const toggleDark = () => setIsDark((prev) => !prev);
 
   return (
-    <MyContext.Provider value={{openMenu, setOpenMenu}}>
+    <MyContext.Provider value={{openMenu, setOpenMenu, prompt, setPrompt ,response, setResponse ,auth
+      ,modelSelected , setSelectedModel
+    }}>
       {children}
     </MyContext.Provider>
   );

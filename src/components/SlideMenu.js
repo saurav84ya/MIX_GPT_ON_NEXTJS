@@ -1,11 +1,14 @@
 "use client"
 
+import { useMyContext } from '@/context/MyContext';
 import { BadgePlus, Search, Settings, User } from 'lucide-react'
 import React from 'react'
 
 export default function SlideMenu() {
+    const { openMenu, setOpenMenu ,auth ,  response ,modelSelected , setSelectedModel} = useMyContext();
     return (
-        <div className="h-[87dvh]  w-[280px] flex flex-col justify-between bg-[#212121] border-black border  p-4  shadow-xl rounded-md">
+        <div className="h-[87dvh]  w-[280px] flex flex-col justify-between 
+        bg-[#212121] border-black border  p-4  shadow-xl rounded-md">
             {/* Top Icons */}
             <div className="flex justify-between mb-4">
                 <Search className="cursor-pointer" />
@@ -19,16 +22,19 @@ export default function SlideMenu() {
 
             {/* Model Select */}
             <div className="mb-6">
-                <h2 className="text-lg mb-2 font-semibold">Select Model</h2>
-                <select
-                    name="model"
-                    className="w-full bg-[#212121] p-2 rounded text-white font-bold cursor-pointer outline-none"
-                >
-                    <option value="chatGpt">Chat Gpt</option>
-                    <option value="gemini">Gemini</option>
-                    <option value="gamma">Gamma</option>
-                </select>
-            </div>
+      <h2 className="text-lg mb-2 font-semibold">Select Model</h2>
+      <select
+        name="model"
+        value={modelSelected}
+        onChange={(e) => setSelectedModel(e.target.value)}
+        className="w-full bg-[#212121] p-2 rounded text-white font-bold cursor-pointer outline-none"
+      >
+        <option value="deepseek">DeepSeek</option>
+        <option value="chatGpt">Chat Gpt</option>
+        <option value="gemini">Gemini</option>
+        <option value="gamma">Gamma</option>
+      </select>
+    </div>
 
             {/* History Scrollable */}
             <div className="mb-6">
@@ -37,7 +43,8 @@ export default function SlideMenu() {
                     {Array(20).fill("odilscndscndacn").map((item, index) => (
                         <div
                             key={index}
-                            className="bg-[#1e1e1e] px-3 py-2 rounded hover:bg-[#2b2b2b] cursor-pointer"
+                            className="bg-[#1e1e1e] px-3 py-2 rounded hover:bg-[#2b2b2b]
+                             cursor-pointer"
                         >
                             {item}
                         </div>
@@ -46,7 +53,8 @@ export default function SlideMenu() {
             </div>
 
             {/* Bottom Icons */}
-            <div className="flex justify-between items-center mt-auto pt-4 px-5 border-t border-[#333]">
+            <div className="flex justify-between items-center mt-auto
+             pt-4 px-5 border-t border-[#333]">
                 <Settings className="cursor-pointer" />
                 <User className="cursor-pointer" />
             </div>

@@ -1,8 +1,8 @@
 "use client"
 
 import { useMyContext } from '@/context/MyContext';
-import { BadgePlus, BookText, LogOut, Menu, Settings, User } from 'lucide-react';
-import React, {  useRef, useEffect, useState } from 'react'
+import { BadgePlus, BookText, CircleX, LogOut, Menu, Settings, User } from 'lucide-react';
+import React, { useRef, useEffect, useState } from 'react'
 
 const menus = [
     { icon: <BookText />, label: "My Asks" },
@@ -14,11 +14,11 @@ const menus = [
 
 export default function UnAuthNav() {
 
-    const auth = true
+    // const auth = !true
 
     const [openMenuProfile, setOpenMenuProfile] = useState(false)
 
-    const { openMenu, setOpenMenu} = useMyContext();
+    const { openMenu, setOpenMenu ,auth } = useMyContext();
 
 
 
@@ -27,30 +27,36 @@ export default function UnAuthNav() {
     const menuRef = useRef(null);
     useEffect(() => {
         const handleClickOutside = (event) => {
-          if (menuRef.current && !menuRef.current.contains(event.target)) {
-            setOpenMenuProfile(false);
-          }
+            if (menuRef.current && !menuRef.current.contains(event.target)) {
+                setOpenMenuProfile(false);
+            }
         };
-    
+
         document.addEventListener("mousedown", handleClickOutside);
         return () => document.removeEventListener("mousedown", handleClickOutside);
-      }, []);
-    
+    }, []);
+
 
     return (
         <div className='flex justify-between p-4 ' >
             <div>
-                {!auth ? <button><BadgePlus size={40} /></button> :
-                    <button onClick={() => setOpenMenu(!openMenu)}  ><Menu size={40} /></button>}
+                {!auth ? (
+                    <button>
+                        <BadgePlus size={40} />
+                    </button>
+                ) : !openMenu ? (
+                    <button onClick={() => setOpenMenu(true)}>
+                        <Menu size={40} />
+                    </button>
+                ) : (
+                    <button onClick={() => setOpenMenu(false)}>
+                        <CircleX size={40} />
+                    </button>
+                )}
+            </div>
 
-            </div>
-            <div className=' border-r-pink-500 border-l-pink-500border-r-pink-500 border-b-pink-500border-r-pink-500 shadow-3xl rounded-4xl ' >
-                <select name="model" id=" " className='font-bold text-xl lg:text-2xl bg-[#212121] p-2 cursor-pointer ' >
-                    <option value="chatGpt">Chat Gpt</option>
-                    <option value="gemini">Gemini</option>
-                    <option value="gamma">Gamma</option>
-                </select>
-            </div>
+                <h1 className='font-bold md:text-2xl text-xl ' >Mix Gpt</h1>
+           
             {!auth ?
 
                 <div className='flex gap-5 ' >
@@ -64,19 +70,19 @@ export default function UnAuthNav() {
                         </div>
                     </div>
 
-                    
 
-                    { openMenuProfile && <div ref={menuRef} className="absolute top-[60px] md:right-5 right-1  z-50">
+
+                    {openMenuProfile && <div ref={menuRef} className="absolute top-[60px] md:right-5 right-1  z-50">
                         <div className="rounded-xl border border-black  shadow-lg overflow-hidden  ">
                             {
-                            menus.map((item, index) => (
-                                <div
-                                    key={index}
-                                    className="px-4 py-3 md:text-2xl text-xl flex items-center gap-2 w-[180px] hover:bg-black cursor-pointer select-none"
-                                >
-                                    {item.icon} {item.label}
-                                </div>
-                            ))}
+                                menus.map((item, index) => (
+                                    <div
+                                        key={index}
+                                        className="px-4 py-3 md:text-2xl text-xl flex items-center gap-2 w-[180px] hover:bg-black cursor-pointer select-none"
+                                    >
+                                        {item.icon} {item.label}
+                                    </div>
+                                ))}
                         </div>
                     </div>
                     }
