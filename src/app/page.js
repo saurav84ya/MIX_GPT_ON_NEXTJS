@@ -25,6 +25,9 @@ export default function Home() {
            return () => document.removeEventListener("mousedown", handleClickOutside);
          }, []);
 
+
+        //  console.log("response.length",response.length)
+
   return (
     <div className="relative flex "  >
 
@@ -43,7 +46,7 @@ export default function Home() {
 
           </div>
 
-          <div className={` ${response ? " absolute bottom-2   " : ""} `} >
+          <div className={` ${response  ? " absolute bottom-2   " : ""} `} >
             <PromptInput />
           </div>
 

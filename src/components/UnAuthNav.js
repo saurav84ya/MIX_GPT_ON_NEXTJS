@@ -43,7 +43,7 @@ export default function UnAuthNav() {
         <div className='flex justify-between p-4 ' >
             <div>
                 {!auth ? (
-                    <button onClick={ () => {setResponse([])}  } className='cursor-pointer' >
+                    <button onClick={ () => {setResponse(null)}  } className='cursor-pointer' >
                         <BadgePlus size={40} />
                     </button>
                 ) : !openMenu ? (
