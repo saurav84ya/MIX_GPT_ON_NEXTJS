@@ -20,7 +20,7 @@ export default function UnAuthNav() {
 
     const [openMenuProfile, setOpenMenuProfile] = useState(false)
 
-    const { openMenu, setOpenMenu, auth, modelSelected, setSelectedModel } = useMyContext();
+    const { openMenu, setOpenMenu, auth, modelSelected, setSelectedModel ,response, setResponse } = useMyContext();
 
 
 
@@ -43,7 +43,7 @@ export default function UnAuthNav() {
         <div className='flex justify-between p-4 ' >
             <div>
                 {!auth ? (
-                    <button>
+                    <button onClick={ () => {setResponse([])}  } className='cursor-pointer' >
                         <BadgePlus size={40} />
                     </button>
                 ) : !openMenu ? (
