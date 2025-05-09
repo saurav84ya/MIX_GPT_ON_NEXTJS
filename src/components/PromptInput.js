@@ -19,16 +19,17 @@ export default function PromptInput() {
 
     setLoading(true);
     try {
-      const res = await fetch("/api/prompt", {
+      const res = await fetch("/api/unAuthPrompt", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ prompt ,modelSelected }),
       });
 
       const data = await res.json();
+      
       if (data.success) {
-        setResponse(data);
-        toast.success(`response from ${data?.model}`);
+        setResponse(prev => [...prev, data]);
+        toast.success(`response from ${data?.response.model}`);
         setPrompt("")
       } else {
         toast.error("❌ " + data.message);
@@ -41,7 +42,7 @@ export default function PromptInput() {
   };
 
   return (
-    <div className="rounded-xl border border-black md:p-4 p-2 mt-4 shadow-xl">
+    <div className="rounded-xl border bg-[#212121] border-black md:p-4 p-2 mt-4 shadow-xl">
       <textarea
         className="bg-[#303030] md:w-[70vw] w-[90vw] lg:w-[700px] xl:w-[900px] rounded-xl border border-black h-[100px] md:p-4 p-2 text-white"
         value={prompt}
@@ -64,13 +65,6 @@ export default function PromptInput() {
         }
       </div>
 
-      {/* {loading ? (
-        <p className="mt-4 text-yellow-400">⌛ Thinking...</p>
-      ) : response ? (
-        <div className="mt-4 bg-[#222] text-white p-4 rounded-xl">
-          <strong>AI:</strong> {response}
-        </div>
-      ) : null} */}
     </div>
   );
 }

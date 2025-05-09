@@ -33,8 +33,7 @@ export default function RootLayout({ children }) {
 
 
         <MyContextProvider>
-          {!auth ? <UnAuthNav className="flex " /> :
-            <AuthNav />}
+         <UnAuthNav className="flex " /> 
           {children}
         </MyContextProvider>
       </body>

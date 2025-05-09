@@ -34,11 +34,11 @@ export default function Home() {
 
       <div className={`flex-1  ${auth ? "" : "mx-auto"} `} >
 
-        <div className={` relative  max-w-[1024px] mx-auto   h-[90dvh] flex flex-col items-center justify-center `}   >
+        <div className={` relative  max-w-[1024px] mx-auto   h-[90dvh] flex flex-col items-center  ${!response ?   'justify-center' : ""}  `}   >
 
           <div>
             <div>
-              {response ? <ResChatGpt response={response}  /> : <h1>What can I help with?</h1>}
+              {response ? <ResChatGpt response={response}  /> : <h1 className="font-bold" >What can I help with?</h1>}
             </div>
 
           </div>

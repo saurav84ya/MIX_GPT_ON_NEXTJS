@@ -14,13 +14,15 @@ export const MyContextProvider = ({ children }) => {
       const [prompt, setPrompt] = useState("");
         const [response, setResponse] = useState("");
         const [modelSelected , setSelectedModel] = useState("deepseek")
+
+        const [currentPromptSession , setCurrentPromptSession] = useState([null])
   
 
   const toggleDark = () => setIsDark((prev) => !prev);
 
   return (
     <MyContext.Provider value={{openMenu, setOpenMenu, prompt, setPrompt ,response, setResponse ,auth
-      ,modelSelected , setSelectedModel
+      ,modelSelected , setSelectedModel ,currentPromptSession , setCurrentPromptSession
     }}>
       {children}
     </MyContext.Provider>

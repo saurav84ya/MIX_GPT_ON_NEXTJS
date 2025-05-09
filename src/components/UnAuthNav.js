@@ -16,11 +16,11 @@ export default function UnAuthNav() {
 
     // const auth = !true
 
-    
+
 
     const [openMenuProfile, setOpenMenuProfile] = useState(false)
 
-    const { openMenu, setOpenMenu ,auth,modelSelected , setSelectedModel } = useMyContext();
+    const { openMenu, setOpenMenu, auth, modelSelected, setSelectedModel } = useMyContext();
 
 
 
@@ -57,22 +57,22 @@ export default function UnAuthNav() {
                 )}
             </div>
 
-                {/* <h1 className='font-bold md:text-2xl text-xl ' >Mix Gpt</h1> */}
+            {auth ? <h1 className='font-bold md:text-2xl text-xl ' >Mix Gpt</h1> :
 
                 <div>
-                <select
-        name="model"
-        value={modelSelected}
-        onChange={(e) => setSelectedModel(e.target.value)}
-        className="w-full bg-[#212121] p-2 rounded text-white font-bold cursor-pointer outline-none"
-      >
-        <option value="deepseek">DeepSeek</option>
-        <option value="llama">Llama</option>
-        <option value="gemini">Gemini</option>
-        <option value="gemma2">Gamma2</option>
-      </select>
-                </div>
-           
+                    <select
+                        name="model"
+                        value={modelSelected}
+                        onChange={(e) => setSelectedModel(e.target.value)}
+                        className="w-full bg-[#212121] p-2 rounded text-white font-bold cursor-pointer outline-none"
+                    >
+                        <option value="deepseek">DeepSeek</option>
+                        <option value="llama">Llama</option>
+                        <option value="gemini">Gemini</option>
+                        <option value="gemma2">Gamma2</option>
+                    </select>
+                </div>}
+
             {!auth ?
 
                 <div className='flex gap-5 ' >

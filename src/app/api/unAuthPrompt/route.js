@@ -1,5 +1,6 @@
 
 import {getResponseDeepSeek , getResponseGemini, getResponseGemma ,getResponseLlama} from '@/lib/ai'
+import { model } from 'mongoose';
 
 export async function POST(req) {
     try {
@@ -26,7 +27,11 @@ export async function POST(req) {
         return Response.json({ success: false, message: "Invalid model" }, { status: 400 });
       }
   
-      return Response.json({ success: true, response: responseText  , model : modelSelected }, { status: 200 });
+      return Response.json({ success: true, response: {
+        prompt : prompt ,
+        answer : responseText ,
+        model : modelSelected 
+      }}, { status: 200 });
   
     } catch (error) {
       console.error("API Error:", error);

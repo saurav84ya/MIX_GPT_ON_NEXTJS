@@ -29,6 +29,6 @@ body {
 
 
 .custom-scroll {
-  scrollbar-color: #212121 black;
+  scrollbar-color: black  #212121 ;
   scrollbar-width: thin;
 }
