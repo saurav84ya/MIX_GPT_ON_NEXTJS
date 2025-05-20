@@ -4,6 +4,7 @@ import UnAuthNav from "@/components/UnAuthNav";
 import AuthNav from "@/components/AuthNav";
 import { MyContextProvider } from "@/context/MyContext";
 import { Toaster } from "react-hot-toast";
+import SessionWrapper from "@/components/SessionWrapper";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,13 +30,15 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable}  antialiased`}
       >
+        <SessionWrapper >
         <Toaster position="top-center" reverseOrder={false} />
 
 
         <MyContextProvider>
-         <UnAuthNav className="flex " /> 
+        
           {children}
         </MyContextProvider>
+        </SessionWrapper>
       </body>
     </html>
   );

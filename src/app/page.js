@@ -3,6 +3,7 @@
 import PromptInput from "@/components/PromptInput";
 import ResChatGpt from "@/components/ResChatGpt";
 import SlideMenu from "@/components/SlideMenu";
+import UnAuthNav from "@/components/UnAuthNav";
 import { useMyContext } from "@/context/MyContext";
 import { useEffect, useRef } from "react";
 
@@ -26,9 +27,10 @@ export default function Home() {
          }, []);
 
 
-        //  console.log("response.length",response.length)
+         console.log("response.length",response.length == 0)
 
   return (
+    <> <UnAuthNav className="flex " /> 
     <div className="relative flex "  >
 
       { openMenu  && auth  ? <div ref={menuRef} className="absolute  z-20 lg:relative bg-[#212121]  " >
@@ -37,16 +39,16 @@ export default function Home() {
 
       <div className={`flex-1  ${auth ? "" : "mx-auto"} `} >
 
-        <div className={` relative  max-w-[1024px] mx-auto   h-[90dvh] flex flex-col items-center  ${!response ?   'justify-center' : ""}  `}   >
+        <div className={` relative  max-w-[1024px] mx-auto       h-[90dvh] flex flex-col items-center  ${response.length == 0 ?   'justify-center' : ""}  `}   >
 
           <div>
             <div>
-              {response ? <ResChatGpt response={response}  /> : <h1 className="font-bold" >What can I help with?</h1>}
+              {!response.length == 0  ? <ResChatGpt response={response}  /> : <h1 className="font-bold" >What can I help with?</h1>}
             </div>
 
           </div>
 
-          <div className={` ${response  ? " absolute bottom-2   " : ""} `} >
+          <div className={` ${!response.length == 0  ? " absolute bottom-2   " : ""} `} >
             <PromptInput />
           </div>
 
@@ -58,5 +60,6 @@ export default function Home() {
 
       {/* <h1 className="text-center" >MixGpt can make mistakes. Check important info</h1> */}
     </div>
+    </>
   );
 }

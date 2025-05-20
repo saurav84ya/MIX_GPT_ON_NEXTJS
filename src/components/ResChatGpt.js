@@ -16,7 +16,7 @@ export default function ResChatGpt({ response }) {
       //     ? "xl:w-[60%] lg:w-[70%] md:w-[80%] w-[90%] mx-auto max-h-[80vh]"
       //     : "max-h-[60vh] md:w-[70vw] w-[80vw] lg:w-[700px] xl:w-[900px]"
       // }`}
-      className='overflow-y-scroll md:h-[70vh] h-[65vh] max-w-[750px] custom-scroll pr-1 space-y-1  '
+      className='overflow-y-scroll  md:h-[70vh] h-[65vh] max-w-[750px] custom-scroll pr-1 space-y-1  '
     >
       {response?.map((resItem, index) => {
         const res = resItem.response;
