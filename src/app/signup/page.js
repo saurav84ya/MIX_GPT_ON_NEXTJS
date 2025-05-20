@@ -31,6 +31,7 @@ export default function SignupPage() {
         {/* Google Button */}
         <button
           className="w-full flex items-center justify-center gap-3 border border-gray-300 rounded-lg px-4 py-2 hover:bg-gray-50 hover:text-black cursor-pointer transition"
+           onClick={() => signIn("google")}
         >
           <FcGoogle size={22} />
           <span className="text-sm font-medium">Continue with Google</span>

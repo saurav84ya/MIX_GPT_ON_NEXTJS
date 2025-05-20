@@ -23,7 +23,6 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
 
-  const auth = false
 
   return (
     <html lang="en">

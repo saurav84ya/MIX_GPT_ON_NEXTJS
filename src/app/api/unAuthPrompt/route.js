@@ -1,6 +1,6 @@
 
 import {getResponseDeepSeek , getResponseGemini, getResponseGemma ,getResponseLlama} from '@/lib/ai'
-import { model } from 'mongoose';
+
 
 export async function POST(req) {
     try {

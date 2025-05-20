@@ -5,7 +5,7 @@ import { BadgePlus, Search, Settings, User } from 'lucide-react'
 import React from 'react'
 
 export default function SlideMenu() {
-    const { openMenu, setOpenMenu ,auth ,  response ,modelSelected , setSelectedModel} = useMyContext();
+    const { openMenu, setOpenMenu ,auth ,promptsHistoryList,  response ,modelSelected , setSelectedModel} = useMyContext();
     return (
         <div className="h-[87dvh]  w-[280px] flex flex-col justify-between 
         bg-[#212121] border-black border  p-4  shadow-xl rounded-md">
@@ -40,13 +40,13 @@ export default function SlideMenu() {
             <div className="mb-6">
                 <h2 className="text-lg font-semibold mb-2">History</h2>
                 <div className="h-[350px] overflow-y-auto custom-scroll pr-1 space-y-1">
-                    {Array(20).fill("odilscndscndacn").map((item, index) => (
+                    {promptsHistoryList?.map((item, index) => (
                         <div
                             key={index}
                             className="bg-[#1e1e1e] px-3 py-2 rounded hover:bg-[#2b2b2b]
                              cursor-pointer"
                         >
-                            {item}
+                            {item?.prompt}
                         </div>
                     ))}
                 </div>

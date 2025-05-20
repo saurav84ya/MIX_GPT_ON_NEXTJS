@@ -8,38 +8,47 @@ import { useMyContext } from "@/context/MyContext";
 
 export default function PromptInput() {
 
-    const {  prompt, setPrompt ,response, setResponse ,modelSelected , setSelectedModel } = useMyContext();
+  const { prompt, setPrompt, response, setResponse, modelSelected, setSelectedModel, session } = useMyContext();
   const [loading, setLoading] = useState(false);
 
-  const sendPrompt = async () => {
-    if (!prompt.trim()) {
-      toast.error("Please enter a prompt!");
-      return;
-    }
+ const sendPrompt = async () => {
+  if (!prompt.trim()) {
+    toast.error("Please enter a prompt!");
+    return;
+  }
 
-    setLoading(true);
-    try {
-      const res = await fetch("/api/unAuthPrompt", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ prompt ,modelSelected }),
-      });
+  const isAuthenticated = !!session;
+  const userId = session?.user?._id;
+  const apiRoute = isAuthenticated ? "/api/authPrompt" : "/api/unAuthPrompt";
+  const payload = isAuthenticated
+    ? { prompt, modelSelected, userId }
+    : { prompt, modelSelected };
 
-      const data = await res.json();
-      
-      if (data.success) {
-        setResponse(prev => [...prev, data]);
-        toast.success(`response from ${data?.response.model}`);
-        setPrompt("")
-      } else {
-        toast.error("❌ " + data.message);
-      }
-    } catch (err) {
-      toast.error("⚠️ Server error!");
-    } finally {
-      setLoading(false);
+  setLoading(true);
+  try {
+    const res = await fetch(apiRoute, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+
+    const data = await res.json();
+
+    if (data.success) {
+      setResponse((prev) => [...prev, data]);
+      toast.success(`Response from ${data?.response?.model}`);
+      setPrompt("");
+    } else {
+      toast.error("❌ " + data.message);
     }
-  };
+  } catch (err) {
+    toast.error("⚠️ Server error!");
+  } finally {
+    setLoading(false);
+  }
+};
+
+
 
   return (
     <div className="rounded-xl border bg-[#212121] border-black md:p-4 p-2 mt-4 shadow-xl">
@@ -56,12 +65,12 @@ export default function PromptInput() {
         </div>
         {
           loading ? <LoadingSpinner /> : <button
-          className="cursor-pointer"
-          onClick={sendPrompt}
-          disabled={loading}
-        >
-          <Send />
-        </button>
+            className="cursor-pointer"
+            onClick={sendPrompt}
+            disabled={loading}
+          >
+            <Send />
+          </button>
         }
       </div>
 
