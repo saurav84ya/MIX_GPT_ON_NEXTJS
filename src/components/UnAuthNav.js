@@ -24,7 +24,7 @@ export default function UnAuthNav() {
     const [openMenuProfile, setOpenMenuProfile] = useState(false)
 
     const { openMenu, setOpenMenu, auth, modelSelected,
-        setSelectedModel, response, setResponse ,session} = useMyContext();
+        setSelectedModel, response ,  setResponse ,session} = useMyContext();
 
     const router = useRouter();
 
@@ -47,9 +47,11 @@ export default function UnAuthNav() {
 
     return (
         <div className='flex justify-between p-4 ' >
+
+           
             <div>
                 {!auth ? (
-                    <button onClick={() => { setResponse(null) }} className='cursor-pointer' >
+                    <button onClick={ () => { setResponse([]) } }className='cursor-pointer' >
                         <BadgePlus size={40} />
                     </button>
                 ) : !openMenu ? (
@@ -100,7 +102,7 @@ export default function UnAuthNav() {
 
 
 
-                    {openMenuProfile && <div ref={menuRef} className="absolute top-[60px] md:right-5 right-1  z-50">
+                    {openMenuProfile && <div ref={menuRef} className="absolute top-[60px] md:right-5 right-1 bg-[#212121]  z-50">
                         {/* <div className="rounded-xl border border-black  shadow-lg overflow-hidden  ">
                             {
                                 menus.map((item, index) => (

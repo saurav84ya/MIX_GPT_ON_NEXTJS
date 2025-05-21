@@ -11,6 +11,7 @@ export async function POST(req) {
   try {
     const body = await req.json();
     const { prompt, modelSelected, userId } = body;
+    console.log("prompt, modelSelected, userId ", prompt, modelSelected, userId)
 
     if (!prompt || !modelSelected || !userId) {
       return Response.json({ success: false, message: "Missing required fields" }, { status: 400 });
@@ -46,23 +47,26 @@ export async function POST(req) {
     const saved = await UserPrompt.create({
       userId,
       prompt,
-      response: responseText,
-      modelUsed: modelSelected
+      answer: responseText,    // ✅ answer not response
+      model: modelSelected     // ✅ model not modelUsed
     });
+
 
     return Response.json({
       success: true,
       response: {
         id: saved._id,
         prompt: saved.prompt,
-        answer: saved.response,
-        model: saved.modelUsed,
+        answer: saved.answer,     // ✅ correct
+        model: saved.model,       // ✅ correct
         createdAt: saved.createdAt
       }
     }, { status: 200 });
 
+
+
   } catch (error) {
-    console.error("API Error:", error);
+    console.error("API Error hai :", error);
     return Response.json({ success: false, message: "Internal Server Error" }, { status: 500 });
   }
 }

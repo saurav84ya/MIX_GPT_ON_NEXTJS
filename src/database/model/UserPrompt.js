@@ -10,11 +10,11 @@ const UserPromptSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    response: {
+    answer: {
         type: String,
         required: true
     },
-    modelUsed: {
+    model: {
         type: String,
         required: true
     },

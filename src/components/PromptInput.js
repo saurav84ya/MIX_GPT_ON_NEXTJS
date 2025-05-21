@@ -34,6 +34,8 @@ export default function PromptInput() {
 
     const data = await res.json();
 
+    console.log("dtat" ,data)
+
     if (data.success) {
       setResponse((prev) => [...prev, data]);
       toast.success(`Response from ${data?.response?.model}`);

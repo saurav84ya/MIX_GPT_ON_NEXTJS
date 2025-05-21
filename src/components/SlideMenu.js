@@ -5,14 +5,14 @@ import { BadgePlus, Search, Settings, User } from 'lucide-react'
 import React from 'react'
 
 export default function SlideMenu() {
-    const { openMenu, setOpenMenu ,auth ,promptsHistoryList,  response ,modelSelected , setSelectedModel} = useMyContext();
+    const { openMenu, setOpenMenu ,setResponse,auth, promptRequests,promptsHistoryList,  response ,modelSelected , setSelectedModel} = useMyContext();
     return (
         <div className="h-[87dvh]  w-[280px] flex flex-col justify-between 
         bg-[#212121] border-black border  p-4  shadow-xl rounded-md">
             {/* Top Icons */}
             <div className="flex justify-between mb-4">
                 <Search className="cursor-pointer" />
-                <BadgePlus className="cursor-pointer" />
+                <BadgePlus onClick={ () => { setResponse([]) }  }   className="cursor-pointer" />
             </div>
 
             {/* Logo */}
@@ -40,15 +40,22 @@ export default function SlideMenu() {
             <div className="mb-6">
                 <h2 className="text-lg font-semibold mb-2">History</h2>
                 <div className="h-[350px] overflow-y-auto custom-scroll pr-1 space-y-1">
-                    {promptsHistoryList?.map((item, index) => (
+                    {
+                        promptsHistoryList?.length == 0 ? <h1> No History </h1> : 
+
+                        promptsHistoryList?.map((item, index) => (
                         <div
                             key={index}
                             className="bg-[#1e1e1e] px-3 py-2 rounded hover:bg-[#2b2b2b]
                              cursor-pointer"
+                             onClick={() => promptRequests( item?._id , 'get' ) }
                         >
                             {item?.prompt}
                         </div>
-                    ))}
+                    ))
+
+                    }
+                    
                 </div>
             </div>
 
