@@ -11,6 +11,8 @@ export async function GET(req) {
     const userId = searchParams.get("userId");
     const action = searchParams.get("action");
 
+    console.log("!userId || !promptId || !action" , userId , promptId , action )
+
     if (!userId || !promptId || !action) {
       return NextResponse.json({
         success: false,
@@ -19,17 +21,39 @@ export async function GET(req) {
     }
 
     if (action === "get") {
-      const response = await UserPrompt.findOne({ _id: promptId, userId });
-      if (!response) {
+
+
+      const res = await UserPrompt.findOne({ _id: promptId, userId });
+      if (!res) {
         return NextResponse.json({
           success: false,
           message: "Data not found",
         }, { status: 400 });
       }
+
+      const response = {
+        _id : res._id ,
+        prompt : res.prompt ,
+        answer : res.answer,
+        model : res.model,
+        createdAt : res.createdAt ,
+        __v : res.__v,
+        isHistory : true,
+      }
+
+
+
       return NextResponse.json({ success: true, response }, { status: 200 });
+
+
+
+
     } else if (action === "del") {
       await UserPrompt.findOneAndDelete({ _id: promptId, userId });
-      return NextResponse.json({ success: true }, { status: 200 });
+
+      return NextResponse.json({ success: true , del : true , promptId : promptId }, { status: 200 });
+
+
     } else {
       return NextResponse.json({ success: false, message: "Invalid action" }, { status: 400 });
     }

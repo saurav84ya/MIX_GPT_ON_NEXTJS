@@ -6,7 +6,7 @@ const MyContext = createContext();
 
 export const MyContextProvider = ({ children }) => {
 
-  const { data: session,  } = useSession()
+  const { data: session,status   } = useSession()
 
   const [openMenu, setOpenMenu] = useState(false)
   const [prompt, setPrompt] = useState("");
@@ -53,7 +53,7 @@ export const MyContextProvider = ({ children }) => {
       const res = await fetch(`/api/promptsRequests?userId=${session.user._id}&promptId=${promptId}&action=${action}`)
 
     const data = await res.json()
-      // console.log("data",data)
+      console.log("data",data)
       
       // const response = {
       //   answer : data.prompt.answer ,
@@ -61,7 +61,19 @@ export const MyContextProvider = ({ children }) => {
       //   model : data.prompt.model,
       //   id : data.prompt._id
       // }
-      setResponse((prev) => [...prev, data])
+      if(!data.del){
+        setResponse((prev) => [...prev, data])
+      }
+
+      if(data.del){
+        setResponse((prev) => prev.filter(item => item.response.id !== data.promptId));
+
+        setResponse((prev) => prev.filter(item => item.response._id !== data.promptId));
+
+        // toast.success(`Response from  `) 
+      }
+
+
       // console.log("response",response)
     }
 
@@ -72,7 +84,7 @@ export const MyContextProvider = ({ children }) => {
 
   return (
     <MyContext.Provider value={{
-      openMenu, setOpenMenu, prompt, setPrompt, response, setResponse, auth, setAuth, promptsHistoryList ,promptRequests
+      openMenu, setOpenMenu, prompt, setPrompt, response, setResponse, auth, setAuth, promptsHistoryList ,promptRequests,status 
       , modelSelected, setSelectedModel, currentPromptSession, setCurrentPromptSession, session
     }}>
       {children}

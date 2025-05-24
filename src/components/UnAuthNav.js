@@ -4,6 +4,7 @@ import { useMyContext } from '@/context/MyContext';
 import { BadgePlus, BookText, CircleX, LogOut, Menu, Settings, User } from 'lucide-react';
 import { signOut } from 'next-auth/react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React, { useRef, useEffect, useState } from 'react'
 
@@ -117,18 +118,19 @@ export default function UnAuthNav() {
 
                         <div className="rounded-xl border border-black  shadow-lg overflow-hidden  ">
 
-                            <div
+                          <Link href={'/myAsks'} >  <div
                                 className="px-4 py-3 md:text-2xl text-xl flex items-center gap-2 w-[180px] hover:bg-black cursor-pointer select-none"
                             >
                                 <BookText /> My Asks
-                            </div>
+                            </div></Link>
 
+                           <Link href={'/setting'}  >
                             <div
                                 className="px-4 py-3 md:text-2xl text-xl flex items-center gap-2 w-[180px] hover:bg-black cursor-pointer select-none"
                             >
                                 <Settings /> Settings
                             </div>
-
+</Link>
                             <div
                                 className="px-4 py-3 md:text-2xl text-xl flex items-center gap-2 w-[180px] hover:bg-black cursor-pointer select-none"
                             >
