@@ -11,7 +11,7 @@ export async function GET(req) {
     const userId = searchParams.get("userId");
     const action = searchParams.get("action");
 
-    console.log("!userId || !promptId || !action" , userId , promptId , action )
+    // console.log("!userId || !promptId || !action" , userId , promptId , action )
 
     if (!userId || !promptId || !action) {
       return NextResponse.json({

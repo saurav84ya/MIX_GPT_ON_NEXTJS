@@ -2,16 +2,24 @@
 
 import { useMyContext } from '@/context/MyContext';
 import { Trash2 } from 'lucide-react';
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { dracula } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 
 export default function ResChatGpt({ response }) {
-  const isFull = true;
+
 
   const { promptRequests } = useMyContext()
 
-  console.log("response object", response);
+  // console.log("response object", response);
+
+  const scrollRef = useRef(null)
+
+  useEffect(()=>{
+      if(scrollRef.current){
+        scrollRef.current.scrollTop = scrollRef.current.scrollHeight
+      }
+  },[response])
 
   const options = {
     day: '2-digit',
@@ -25,11 +33,7 @@ export default function ResChatGpt({ response }) {
 
   return (
     <div
-      // className={`overflow-y-scroll ${
-      //   isFull
-      //     ? "xl:w-[60%] lg:w-[70%] md:w-[80%] w-[90%] mx-auto max-h-[80vh]"
-      //     : "max-h-[60vh] md:w-[70vw] w-[80vw] lg:w-[700px] xl:w-[900px]"
-      // }`}
+    ref={scrollRef}
       className='overflow-y-scroll  md:h-[70vh] h-[65vh] max-w-[750px] custom-scroll pr-1 space-y-1  '
     >
       {response?.map((resItem, index) => {

@@ -131,11 +131,12 @@ export default function UnAuthNav() {
                                 <Settings /> Settings
                             </div>
 </Link>
+                            <Link href={'/account'} >
                             <div
                                 className="px-4 py-3 md:text-2xl text-xl flex items-center gap-2 w-[180px] hover:bg-black cursor-pointer select-none"
                             >
                                 <User /> Account
-                            </div>
+                            </div></Link>
 
                             <div
                                 className="px-4 py-3 md:text-2xl text-xl flex items-center gap-2 w-[180px] hover:bg-black cursor-pointer select-none"

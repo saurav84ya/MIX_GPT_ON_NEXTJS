@@ -2,6 +2,7 @@
 
 import { useMyContext } from '@/context/MyContext';
 import { BadgePlus, Search, Settings, User } from 'lucide-react'
+import Link from 'next/link';
 import React from 'react'
 
 export default function SlideMenu() {
@@ -62,8 +63,8 @@ export default function SlideMenu() {
             {/* Bottom Icons */}
             <div className="flex justify-between items-center mt-auto
              pt-4 px-5 border-t border-[#333]">
-                <Settings className="cursor-pointer" />
-                <User className="cursor-pointer" />
+               <Link href={'/setting'} > <Settings className="cursor-pointer" /></Link>
+               <Link href={'/account'} > <User className="cursor-pointer" /></Link>
             </div>
         </div>
     );

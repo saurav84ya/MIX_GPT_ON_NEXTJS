@@ -27,6 +27,8 @@ export const MyContextProvider = ({ children }) => {
 
 
   useEffect(() => {
+
+    
     if (session) {
       const fetchUserPrompts = async () => {
         try {
