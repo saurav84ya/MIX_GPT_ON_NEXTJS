@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 
-export default function page() {
+export default function Page() {
 
     const {promptsHistoryList ,promptRequests ,session,status }  = useMyContext()
 
@@ -51,7 +51,7 @@ export default function page() {
     <div className="flex items-center justify-center h-full px-4">
       <div className="bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 px-8 py-6 rounded-2xl shadow-lg w-full max-w-md text-center">
         <p className="text-lg font-semibold">🚫 No History Found</p>
-        <p className="mt-2 text-sm opacity-70">You haven't submitted any prompts yet. Your prompt history will appear here.</p>
+        <p className="mt-2 text-sm opacity-70">You haven&apos;t submitted any prompts yet. Your prompt history will appear here.</p>
       </div>
     </div>
   ) : null
